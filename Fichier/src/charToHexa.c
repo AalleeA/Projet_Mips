@@ -6,8 +6,7 @@
 #include "Read.h"
 #include "charToHexa.h"
 #include "ecritureFichier.h"
-
-
+#include "variableConvertion.h"
 
   /*
   * On reçoit un tableau de type InstructionBrut
@@ -27,24 +26,25 @@ void charToHexa( InstructionBrut instruction[]){//Fonction de redirection
 
 
 
+    }else{
+      //séparation instruction type J, I, r
+      if(instruction[i].Operande2 == NULL){//dans le cas d'une instruction de type J
+
+        convertionInstructionTypeJ(instruction[i].Instruc, instruction[i].Operande1);
+
+      }else{
+        if((instruction[i].Operande3 == NULL)||(instruction[i].Operande3[0] != "$")){//dans le cas d'une instruction de type I
+
+          convertionInstructionTypeI(instruction[i].Instruc, instruction[i].Operande1, instruction[i].Operande2, instruction[i].Operande3);
+
+        }/*
+        else{//dans le cas d'une instruction de type R
+
+          resultat = convertionInstructionTypeR(instruction.Insctruc, instruction.Operande1, instruction.Operande2, instruction.Operande3);
+
+        }*/
+      }
     }
-
-    //séparation instruction type J, I, r
-    if(instruction[i].Operande2 == NULL){//dans le cas d'une instruction de type J
-
-      convertionInstructionTypeJ(instruction[i].Instruc, instruction[i].Operande1);
-
-    }
-    /*if(instruction.Operande3 == NULL){//dans le cas d'une instruction de type I
-
-      resultat = convertionInstructionTypeI(instruction.Instruc, instruction.Operande1, instruction.Operande2);
-
-    }
-    else{//dans le cas d'une instruction de type R
-
-      resultat = convertionInstructionTypeR(instruction.Insctruc, instruction.Operande1, instruction.Operande2, instruction.Operande3);
-
-    }*/
     i++;
   }
 }
@@ -103,11 +103,39 @@ void convertionInstructionTypeJ (char* instruction, char* operande){
     printf("i = %d, valeurOperande = %d, sortie = %s\n", i, valeurOperande, sortie );
 
   }
-  //racollage
+
+  convBinToHexa(reponse, sortie, 0);
+
+  //envoi de la chaine de caractere en hexa
+  //ecrireFichier(reponse);
+  printf("%s\n", reponse );
+
+}
+
+//on rentre bien dedans
+void convertionInstructionTypeI (char* instruction, char* operande1, char* operande2, char* operande3){
+
+  /*
+  *Dans l'ordre
+  * - Récupérer l'opérande correpondante
+  * - Reconnaitre le type I qu'on a, classique/ rt = 0 / rs = 0 / avec base (en utilisant une variable lors de la recherche dans le tableau)
+  * - modifier les operandes si besoin
+  * - Convertir en hexa comme avant
+  */
+
+}
+/*
+void convertionInstructionTypeR (char instruction, char operande1, char operande2, char operande3){
 
 
-  //convertion hexa---Fonctionnelle----OKAY->
-  for(i=0; i<8; i ++){
+
+}*/
+
+//Ca marche
+//on fournit la chaine de reponse (8 caractere hexa), la chaine de 32 bits ainsi que la position actuelle où on se trouve dan sla lecture de celle-ci (i)
+void convBinToHexa(char* reponse, char* sortie, int i){
+
+  if(i < 8){
 
     int j =0;
     char tabTest[5] = {sortie[4*i], sortie[(4*i) + 1], sortie[(4*i) + 2], sortie[(4*i) + 3]};
@@ -126,26 +154,11 @@ void convertionInstructionTypeJ (char* instruction, char* operande){
 
     reponse[i] = *pointeur;
 
+    convBinToHexa(reponse, sortie, i+1);
+
   }
-  // ---->OKAY
-
-  //envoi de la chaine de caractere en hexa
-  //ecrireFichier(reponse);
-  printf("%s\n", reponse );
 
 }
-/*
-char* convertionInstructionTypeI (char instruction, char operande1, char operande2){
-
-
-
-}
-
-char* convertionInstructionTypeR (char instruction, char operande1, char operande2, char operande3){
-
-
-
-}*/
 
 //Ca marche
 int convAphaToDec(char* chaine, int i, int taille){

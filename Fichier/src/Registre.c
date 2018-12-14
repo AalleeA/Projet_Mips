@@ -23,7 +23,7 @@ void Init(Registre* reg){
   (*reg).lo = (*reg).mem+32;
   (*reg).hi = (*reg).mem+33;
   (*reg).pc = (*reg).mem+34;
-  for(int i = 0; i<32;i++){*((*reg).mem+i) = 0;}
+  for(int i = 0; i<35;i++){*((*reg).mem+i) = 0;}
 
 
 }
@@ -39,4 +39,11 @@ void EcrireRegistre(Registre* reg, int R, int val){
   if(R <26){*((*reg).mem+R) = val;}
   else{printf("vous n'avez pas le droit d'ecrire la");}
   *((*reg).mem+0) = 0;
+}
+
+
+void AfficherRegistre(Registre* reg){
+  for(int i = 0; i<35; i++){
+    printf("le Registre : $%d || valeur : %d\n", i, *((*reg).mem+i));
+  }
 }

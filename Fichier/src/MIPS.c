@@ -12,7 +12,6 @@
     InstructionBrut* premier;
     int i = 0;
     do{
-      
       premier = Decode (argv[1]);
       charToHexa(premier);
       i++;
@@ -24,7 +23,7 @@
     Registre regi;
     Init(&regi);
     EcrireRegistre(&regi, 3, 4);
-    printf("%d\n", LireRegistre(&regi, 3));
+    AfficherRegistre(&regi);
 
   }
   else{printf("j'ai pas reussi a ouvrir les fichier");}
