@@ -11,9 +11,16 @@
   if(argc > 0){
     InstructionBrut* premier;
     int i = 0;
+    char* instruction_hexa;
+    Registre regi;
+    InitReg(&regi);     //Initialisation des registres
+    int* memoire;
+    memoire = InitMem();
+
     do{
       premier = Decode (argv[1]);
-      charToHexa(premier);
+      instruction_hexa = charToHexa(premier);
+      ecritureFichier(instruction_hexa);
       i++;
     }while (((*(premier+i)).Instruc != NULL));
     free(premier);
