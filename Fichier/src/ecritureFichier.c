@@ -3,7 +3,7 @@
 #include <string.h>
 
 #include "ecritureFichier.h"
-#include "fonctions.h"
+//#include "fonctions.h"
 
 
 void ecrireFichier(char* instruct){

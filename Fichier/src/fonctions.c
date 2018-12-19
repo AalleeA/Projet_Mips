@@ -5,67 +5,67 @@
 
 #include "fonctions.h"
 
-void SSL(int instruct){
+void SSL(int instruct,Registre* reg){
 
 }
 
-void NOP(int instruct){
+void NOP(int instruct,Registre* reg){
 
 }
 
-void ROTR(int instruct){
+void ROTR(int instruct,Registre* reg){
 
 }
 
-void SRL(int instruct){
+void SRL(int instruct,Registre* reg){
 
 }
 
-void MFHI(int instruct){
+void MFHI(int instruct,Registre* reg){
 
 }
 
-void MHLO(int instruct){
+void MHLO(int instruct,Registre* reg){
 
 }
 
-void MULT(int instruct){
+void MULT(int instruct,Registre* reg){
 
 }
 
-void DIV(int instruct){
+void DIV(int instruct,Registre* reg){
   int operande1 = (instruct >> 21)%0x20;
   int operande2 = (instruct >> 16)%0x20;
 
-  EcrireRegistre(&regi, 33, (LireRegistre(&regi, operande1)/LireRegistre(&regi, operande2)));
-  EcrireRegistre(&regi, 32, (LireRegistre(&regi, operande1)%LireRegistre(&regi, operande2)));
+  EcrireRegistre(&regi, 33, (LireRegistre(reg, operande1)/LireRegistre(reg, operande2)));
+  EcrireRegistre(&regi, 32, (LireRegistre(reg, operande1)%LireRegistre(reg, operande2)));
 }
 
-void ADD(int instruct){
-  int operande1 = (instruct >> 21)%0x20;
-  int operande2 = (instruct >> 16)%0x20;
-  int result = (instruct >> 11)%0x20;
-
-  EcrireRegistre(&regi, result, (LireRegistre(&regi, operande1) + LireRegistre(&regi, operande2)));
-}
-
-void SUB(int instruct){
-
-}
-
-void AND(int instruct){
+void ADD(int instruct,Registre* reg){
   int operande1 = (instruct >> 21)%0x20;
   int operande2 = (instruct >> 16)%0x20;
   int result = (instruct >> 11)%0x20;
 
-  EcrireRegistre(&regi, result, (LireRegistre(&regi, operande1) && LireRegistre(&regi, operande2)));
+  EcrireRegistre(&regi, result, (LireRegistre(reg, operande1) + LireRegistre(reg, operande2)));
 }
 
-void OR(int instruct){
+void SUB(int instruct,Registre* reg){
 
 }
 
-void XOR(int instruct){
+void AND(int instruct,Registre* reg){
+  int operande1 = (instruct >> 21)%0x20;
+  int operande2 = (instruct >> 16)%0x20;
+  int result = (instruct >> 11)%0x20;
+
+  EcrireRegistre(reg, result, (LireRegistre(reg, operande1) && LireRegistre(reg, operande2)));
+}
+
+void OR(int instruct,Registre* reg){
+
+}
+
+void XOR(int instruct,Registre* reg){
 
 }
 

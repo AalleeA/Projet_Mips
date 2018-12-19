@@ -21,7 +21,7 @@ struct Registre {
   int* pc;
 };
 
-void Init(Registre*);
+void InitReg(Registre*);
 
 int LireRegistre(Registre*,int);
 void EcrireRegistre(Registre*, int, int);

@@ -2,50 +2,50 @@
 #include <stdlib.h>
 #include <string.h>
 
-void SSL(int instruct);
+void SSL(int instruct,Registre*);
 
-void NOP(int instruct);
+void NOP(int instruct,Registre*);
 
-void ROTR(int instruct);
+void ROTR(int instruct,Registre*);
 
-void SRL(int instruct);
+void SRL(int instruct,Registre*);
 
-void SYSCALL(int instruct);
+void SYSCALL(int instruct,Registre*);
 
-void MHFI(int instruct);
+void MHFI(int instruct,Registre*);
 
-void MHLO(int instruct);
+void MHLO(int instruct,Registre*);
 
-void MULT(int instruct);
+void MULT(int instruct,Registre*);
 
-void DIV(int instruct);
+void DIV(int instruct,Registre*);
 
-void ADD(int instruct);
+void ADD(int instruct,Registre*);
 
-void SUB(int instruct);
+void SUB(int instruct,Registre*);
 
-void AND(int instruct);
+void AND(int instruct,Registre*);
 
-void OR(int instruct);
+void OR(int instruct,Registre*);
 
-void XOR(int instruct);
+void XOR(int instruct,Registre*);
 
-void jump(int instruct);
+void jump(int instruct,Registre*);
 
-void BEQ(int instruct);
+void BEQ(int instruct,Registre*);
 
-void BNE(int instruct);
+void BNE(int instruct,Registre*);
 
-void BLEZ(int instruct);
+void BLEZ(int instruct,Registre*);
 
-void BGTZ(int instruct);
+void BGTZ(int instruct,Registre*);
 
-void ADDI(int instruct);
+void ADDI(int instruct,Registre*);
 
-void LUI(int instruct);
+void LUI(int instruct,Registre*);
 
-void LW(int instruct);
+void LW(int instruct,Registre*);
 
-void SW(int instruct);
+void SW(int instruct,Registre*);
 
 void lireCodeHexa();
