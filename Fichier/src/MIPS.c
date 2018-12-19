@@ -8,6 +8,7 @@
 
 
  int main(int argc, char *argv[]){
+<<<<<<< HEAD
   if(argc > 0){
     InstructionBrut* premier;
     int i = 0;
@@ -26,11 +27,15 @@
     free(premier);
 
     printf("\n\n\n\n\n\n\n");
+=======
+>>>>>>> master
 
-    Registre regi;
-    Init(&regi);
-    EcrireRegistre(&regi, 3, 4);
-    AfficherRegistre(&regi);
+  if(argc > 0){
+    int* memoire;
+    memoire = InitMem();
+    printf("\n\n%d  ",memoire);
+    printf("%d",*memoire);
+    //AfficherMemoireProg(memoire);
 
   }
   else{printf("j'ai pas reussi a ouvrir les fichier");}

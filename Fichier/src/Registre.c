@@ -5,7 +5,7 @@
 #include "Registre.h"
 
 
-void Init(Registre* reg){
+void InitReg(Registre* reg){
 
   (*reg).mem = malloc(sizeof(int)*35);
   (*reg).zero = (*reg).mem+0;
