@@ -48,4 +48,4 @@ void LW(int instruct,Registre*);
 
 void SW(int instruct,Registre*);
 
-void lireCodeHexa();
+void Execute(int,int*);

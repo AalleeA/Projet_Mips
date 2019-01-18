@@ -144,21 +144,21 @@ void SW(int instruct){
 
 }
 
-void lireCodeHexa(){
+void Execute(int i,int* mem){
   //tableau de int contenant la ligne d'instruction
   int instruct;
   int carrac;
   int operateur = 0; //variable récupérant l'opérateur de l'instruction
   //Ouverture du fichier avec les codes hexa
 
-
-  fichier = fopen("assembleur_hexa.txt","r");
-
-  if(fichier != NULL){
-    do{
-      fscanf(fichier, "%x", &instruct);
-      printf("%x\n", instruct);
-
+      instruct = *(mem+i)<<28 +
+      instruct += *(mem+i+1)<<24;
+      instruct += *(mem+i+2))<<20;
+      instruct += *(mem+i+3)<<16;
+      instruct += *(mem+i+4)<<12;
+      instruct += *(mem+i+5)<<8;
+      instruct += *(mem+i+6)<<4;
+      instruct += *(mem+i+7);
       operateur = instruct>>26;
       switch (operateur) {
         case 0x00:
@@ -216,12 +216,4 @@ void lireCodeHexa(){
 
         case 0x2B: SW(instruct);break;
       }
-      carrac = fgetc(fichier);
-    }while(carrac != '\n' || fgetc(fichier) != EOF);
-    fclose(fichier);
-
-  }
-  else{
-    printf("impossible d'ouvrir ce fichier\n");
-  }
 }
