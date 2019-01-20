@@ -4,7 +4,7 @@
 
 int* InitMem(){
   int* mem = NULL;
-  mem = malloc(sizeof(int)*200);
+  mem = malloc(200*sizeof(int));
   for(int i = 0; i<200; i++){
     *(mem+i) = 0;
   }

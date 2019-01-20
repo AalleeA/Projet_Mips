@@ -1,8 +1,13 @@
 Ce qu'il reste à faire :
-- affichage de la mémoire
-- émuler le fonctionnement du microprocesseur avec les instructions codées en hexa
-	=>récupérer le code hexa dans le fichier
-	=>modifier les registres en fonction de l'instruction
-	=>afficher l'état des registres
-	=>modifier le PC
-- traiter les instructions de type R et I
+- Fonctionnement normal du processeur,
+- Reprendre écritureFichier ajouter des espaces entre chaque octet
+
+
+- Conversion en hexa
+- Instruction R
+
+- fonctions
+
+
+*******FIN*******
+- Relier toutes les parties
