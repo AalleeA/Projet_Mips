@@ -26,7 +26,7 @@
     }while (((*(premier+i)).Instruc != NULL));
     free(premier);
     //ECRITURE memoire
-    
+
 
 
     printf("\n\n\n\n\n\n\n");

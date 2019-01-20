@@ -26,7 +26,7 @@ char instructionI [NBINSTRUCTIONI * 2][7] = {
   {"LW"}, {"100011"},
   {"SW"}, {"101011"}
 };
-  
+
   char binaireToHexa[33][5] = {
     {"0000"},{"0"},
     {"0001"},{"1"},

@@ -57,9 +57,9 @@ char* convertionInstructionTypeJ (char* instruction, char* operande){
   int match = 1;
   int val=0;
   char sortie[33] = {0};
-  printf("sortie init = %s\n", sortie);
   char reponse[9] = {0};
 
+  //recherche de l'instruction
   for(i = 0; i < NBINSTRUCTIONJ * 2; i += 2){//on fait défiler le tableau d'instruction
 
     if( strlen(instruction) == strlen(instructionJ[i])){//si l'instruction testée a la meme taille que celle dans le tableau
@@ -76,19 +76,13 @@ char* convertionInstructionTypeJ (char* instruction, char* operande){
 
   }
 
-  printf("L'instruction %s correspond à la valeur: %s\n", instruction, instructionJ[(val+1)]);
-
   for(i=0; i<6; i++){
     sortie[i] = instructionJ[val+1][i];
   }
-  printf("sortie tmp = %s\n", sortie );
 
   //convertion decimale operande
   int tailleOperande = calculTaille(operande);
-  printf("taille = %d\n", tailleOperande);
-  printf("op = %s\n", operande);
   int valeurOperande = convAphaToDec(operande, 1, tailleOperande);
-  printf("val= %d\n", valeurOperande);
 
   //convertion binaire operande
   char opBin[26] = {0};
@@ -97,12 +91,9 @@ char* convertionInstructionTypeJ (char* instruction, char* operande){
     if(valeurOperande >= (pow(2, i))){
       sortie[25 + 6 - i] = '1';
       valeurOperande -= pow(2,i);
-      printf("ecris\n" );
     }else{
       sortie[25 + 6 - i] = '0';
     }
-    printf("i = %d, valeurOperande = %d, sortie = %s\n", i, valeurOperande, sortie );
-
   }
 
    convBinToHexa(reponse, sortie, 0);
@@ -123,6 +114,25 @@ void convertionInstructionTypeI (char* instruction, char* operande1, char* opera
   * - modifier les operandes si besoin
   * - Convertir en hexa comme avant
   */
+
+  //recherche de l'instruction
+  int i, j, val = 0;
+  for(i = 0; i < NBINSTRUCTIONI * 2; i += 2){
+
+    int  match = 1;
+    while ((instruction[j] != '\0') && (match == 1)) {//verifie que l'instruction soit la meme, caractere par caractere
+      if( instruction[j] != instructionI[i][j]){//teste le caractere i
+        match = 0;
+        printf("pas la bonne instruction,\n instruction de base : %s,\n instruction pas valide : %s\n", instruction, instructionI[i] );
+      }
+      j++;
+    }
+  if(match == 1){ val = i; }
+  printf("val = %d\n", val);
+
+  }
+
+  printf("instruction I : %s = %s\n", instruction, instructionI[val + 1] );
 
 }
 /*
@@ -162,10 +172,6 @@ void convBinToHexa(char* reponse, char* sortie, int i){
 
 //Ca marche
 int convAphaToDec(char* chaine, int i, int taille){
-
-  printf("dans la fct conv, chaine = %s, i = %d, taille = %d\n", chaine, i, taille);
-
-  printf("val i = %d\n", chaine[taille - i] - 48);
 
   if (i == taille){
     return(chaine[0] - 48);
