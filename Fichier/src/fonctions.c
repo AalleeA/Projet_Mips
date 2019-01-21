@@ -149,15 +149,13 @@ void Execute(int i,int* mem, Registre* reg){
   int operateur = 0; //variable récupérant l'opérateur de l'instruction
   //Ouverture du fichier avec les codes hexa
 
-      instruct = *(mem+i)<<28;
-      instruct += *(mem+i+1)<<24;
-      instruct += *(mem+i+2)<<20;
-      instruct += *(mem+i+3)<<16;
-      instruct += *(mem+i+4)<<12;
-      instruct += *(mem+i+5)<<8;
-      instruct += *(mem+i+6)<<4;
-      instruct += *(mem+i+7);
+      instruct = *(mem+i)<<24;
+      instruct += *(mem+i+1)<<16;
+      instruct += *(mem+i+2)<<8;
+      instruct += *(mem+i+3);
+      printf("l'instruction est : %x\n",instruct);
       operateur = instruct>>26;
+
       switch (operateur) {
         case 0x00:
           operateur = instruct%32;
