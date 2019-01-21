@@ -144,7 +144,7 @@ void SW(int instruct){
 
 }
 
-void Execute(int i,int* mem){
+void Execute(int i,int* mem, Registre reg){
   //tableau de int contenant la ligne d'instruction
   int instruct;
   int carrac;
@@ -165,55 +165,55 @@ void Execute(int i,int* mem){
           operateur = instruct%32;
           switch (operateur) {
             case 0x00:
-              if(instruct != 0x00) SSL(instruct);
-              else NOP(instruct);
+              if(instruct != 0x00) SSL(instruct, reg);
+              else NOP(instruct, reg);
               break;
 
             case 0x02:
               operateur = instruct>>21;
-              if(operateur == 1) ROTR(instruct);
-              else SRL(instruct);
+              if(operateur == 1) ROTR(instruct, reg);
+              else SRL(instruct, reg);
               break;
 
-            case 0x0C: SYSCALL(instruct);break;
+            case 0x0C: SYSCALL(instruct, reg);break;
 
-            case 0x10: MFHI(instruct);break;
+            case 0x10: MFHI(instruct, reg);break;
 
-            case 0x12: MHLO(instruct);break;
+            case 0x12: MHLO(instruct, reg);break;
 
-            case 0x18: MULT(instruct);break;
+            case 0x18: MULT(instruct, reg);break;
 
-            case 0x1A: DIV(instruct);break;
+            case 0x1A: DIV(instruct, reg);break;
 
-            case 0x20: ADD(instruct);break;
+            case 0x20: ADD(instruct, reg);break;
 
-            case 0x22: SUB(instruct);break;
+            case 0x22: SUB(instruct, reg);break;
 
-            case 0x24: AND(instruct);break;
+            case 0x24: AND(instruct, reg);break;
 
-            case 0x25: OR(instruct);break;
+            case 0x25: OR(instruct, reg);break;
 
-            case 0x26: XOR(instruct);break;
+            case 0x26: XOR(instruct, reg);break;
 
-            case 0x2A: SLT(instruct);break;
+            case 0x2A: SLT(instruct, reg);break;
           }
 
-        case 0x02: jump(instruct);break;
+        case 0x02: jump(instruct, reg);break;
 
-        case 0x04: BEQ(instruct);break;
+        case 0x04: BEQ(instruct, reg);break;
 
-        case 0x05: BNE(instruct);break;
+        case 0x05: BNE(instruct, reg);break;
 
-        case 0x06: BLEZ(instruct);break;
+        case 0x06: BLEZ(instruct, reg);break;
 
-        case 0x07: BGTZ(instruct);break;
+        case 0x07: BGTZ(instruct, reg);break;
 
-        case 0x08: ADDI(instruct);break;
+        case 0x08: ADDI(instruct, reg);break;
 
-        case 0x0F: LUI(instruct);break;
+        case 0x0F: LUI(instruct, reg);break;
 
-        case 0x23: LW(instruct);break;
+        case 0x23: LW(instruct, reg);break;
 
-        case 0x2B: SW(instruct);break;
+        case 0x2B: SW(instruct, reg);break;
       }
 }

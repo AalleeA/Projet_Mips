@@ -1,6 +1,6 @@
 Ce qu'il reste à faire :
 - Fonctionnement normal du processeur,
-- Reprendre écritureFichier ajouter des espaces entre chaque octet
+
 
 
 - Conversion en hexa

@@ -27,3 +27,23 @@ void ecrireFichier(char* instruct){
     printf("Erreur lors de l'ouverture du fichier\n");
   }
 }
+
+
+int lireFichier(){
+  FILE * fichier;
+
+  int octet;
+
+  fichier = fopen("assembleur_hexa.txt", "r");
+
+  if(fichier != NULL){
+    octet = fgetc(fichier);
+
+    while(octet != EOF){
+      
+    }
+  }
+  else{
+    printf("Erreur lors de l'ouverture du fichier\n");
+  }
+}
