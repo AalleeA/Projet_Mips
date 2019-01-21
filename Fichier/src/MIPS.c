@@ -4,6 +4,7 @@
  #include "charToHexa.h"
  #include "Registre.h"
  #include "memoire.h"
+ #include "fonctions.h"
 
 
 
@@ -14,14 +15,19 @@
 
 
     //exectution
+    printf("***************\nEmulateur MIPS\n\n\n\nFichier compiler\ndebut de l'initialisation");
     Registre reg;
     InitReg(&reg);
+    printf("registre initialiser\n");
     int *memoire = NULL;
     memoire = InitMem();
+    printf("memoire initialiser\n");
     Loadprog(memoire, "Test/Test2.txt");
+    printf("memoire de programe charger\n Affichage : ");
     AfficherMemoireProg(memoire);
+
     while(*(memoire+(*(reg.pc))) != 0 && (*(reg.pc))<100){
-      Execute((*(reg.pc)),memoire);
+      Execute((*(reg.pc)),memoire,&reg);
       AfficherMemoireDonnee(memoire);
       AfficherRegistre(&reg);
       (*(reg.pc))+=8;

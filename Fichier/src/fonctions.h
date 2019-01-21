@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "Registre.h"
 
 void SSL(int instruct,Registre*);
 
@@ -48,4 +49,4 @@ void LW(int instruct,Registre*);
 
 void SW(int instruct,Registre*);
 
-void Execute(int,int*);
+void Execute(int,int*,Registre*);
