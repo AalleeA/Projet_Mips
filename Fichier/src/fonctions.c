@@ -120,10 +120,9 @@ void SLT(int instruct,Registre* reg){
 void jump(int instruct,Registre* reg){
   int index_registre; //opérande de l'instruction Jump
 
-//  printf("%x\n", instruct);
   index_registre = instruct%0x04000000; //garde uniquement les 26 premiers bits
   index_registre = index_registre << 2; //décale à gauche pour retrouver l'adresse pointé par l'instruction
-//  printf("%x\n", index_registre);
+
 
   EcrireRegistre(reg, 34, index_registre);
 }
