@@ -1,2 +1,13 @@
 Ce qu'il reste à faire :
-- fonctionnement normal du processeur
+- Fonctionnement normal du processeur,
+
+
+
+- Conversion en hexa
+- Instruction R
+
+- fonctions
+
+
+*******FIN*******
+- Relier toutes les parties

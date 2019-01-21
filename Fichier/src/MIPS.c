@@ -8,10 +8,10 @@
 
 
 
- int main(int argc, char *argv[]){
+int main(int argc, char *argv[]){
 
-  if(argc > 0){
-    //compilation
+ if(argc > 0){
+   //compilation
 
 
     //exectution
@@ -34,6 +34,6 @@
     }
 
 
-  }
-  else{printf("j'ai pas reussi a ouvrir les fichier");}
+ }
+ else{printf("j'ai pas reussi a ouvrir les fichier");}
 }

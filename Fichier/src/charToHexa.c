@@ -13,8 +13,8 @@
   * Si l'element Instruc de l'InstructionBrut est == NULL alors fin du tableau
   */
 
-void charToHexa( InstructionBrut instruction[]){//Fonction de redirection
-
+char* charToHexa( InstructionBrut instruction[]){//Fonction de redirection
+  char* result;
   int i = 0;
   while(instruction[i].Instruc != NULL){//arret lorsque plus d'instructions
 
@@ -30,12 +30,12 @@ void charToHexa( InstructionBrut instruction[]){//Fonction de redirection
       //séparation instruction type J, I, r
       if(instruction[i].Operande2 == NULL){//dans le cas d'une instruction de type J
 
-        convertionInstructionTypeJ(instruction[i].Instruc, instruction[i].Operande1);
+        result = convertionInstructionTypeJ(instruction[i].Instruc, instruction[i].Operande1);
 
       }else{
         if((instruction[i].Operande3 == NULL)||(instruction[i].Operande3[0] != "$")){//dans le cas d'une instruction de type I
 
-          convertionInstructionTypeI(instruction[i].Instruc, instruction[i].Operande1, instruction[i].Operande2, instruction[i].Operande3);
+          result = convertionInstructionTypeI(instruction[i].Instruc, instruction[i].Operande1, instruction[i].Operande2, instruction[i].Operande3);
 
         }/*
         else{//dans le cas d'une instruction de type R
@@ -47,9 +47,10 @@ void charToHexa( InstructionBrut instruction[]){//Fonction de redirection
     }
     i++;
   }
+  return result;
 }
 
-void convertionInstructionTypeJ (char* instruction, char* operande){
+char* convertionInstructionTypeJ (char* instruction, char* operande){
 
   int i = 0;
   int j = 0;
@@ -95,12 +96,12 @@ void convertionInstructionTypeJ (char* instruction, char* operande){
     }
   }
 
-  convBinToHexa(reponse, sortie, 0);
+   convBinToHexa(reponse, sortie, 0);
 
   //envoi de la chaine de caractere en hexa
   //ecrireFichier(reponse);
   printf("%s\n", reponse );
-
+  return reponse;
 }
 
 //on rentre bien dedans
@@ -167,7 +168,6 @@ void convBinToHexa(char* reponse, char* sortie, int i){
     convBinToHexa(reponse, sortie, i+1);
 
   }
-
 }
 
 //Ca marche
