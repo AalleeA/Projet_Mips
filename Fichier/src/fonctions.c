@@ -3,16 +3,18 @@
 #include <string.h>
 #include "Registre.h"
 #include "fonctions.h"
+#include "memoire.h"
 
 void SSL(int instruct,Registre* reg){
 
 }
 
 void NOP(int instruct,Registre* reg){
-
+  SSL(0,reg);
 }
 
 void ROTR(int instruct,Registre* reg){
+
 
 }
 
@@ -21,11 +23,15 @@ void SRL(int instruct,Registre* reg){
 }
 
 void MFHI(int instruct,Registre* reg){
+  int   rd = (instruct >> 11)%0x20;
 
+  EcrireRegistre(reg, rd, *(reg->hi));
 }
 
 void MHLO(int instruct,Registre* reg){
+  int   rd = (instruct >> 11)%0x20;
 
+  EcrireRegistre(reg, rd, *(reg->lo));
 }
 
 void MULT(int instruct,Registre* reg){
@@ -49,7 +55,11 @@ void ADD(int instruct,Registre* reg){
 }
 
 void SUB(int instruct,Registre* reg){
+  int operande1 = (instruct >> 21)%0x20;
+  int operande2 = (instruct >> 16)%0x20;
+  int result = (instruct >> 11)%0x20;
 
+  EcrireRegistre(reg, result, (LireRegistre(reg, operande1)-LireRegistre(reg, operande2)));
 }
 
 void AND(int instruct,Registre* reg){
@@ -65,7 +75,10 @@ void OR(int instruct,Registre* reg){
 }
 
 void XOR(int instruct,Registre* reg){
-
+  int operande1 = (instruct >> 21)%0x20;
+  int operande2 = (instruct >> 16)%0x20;
+  int result = (instruct >> 11)%0x20;
+  EcrireRegistre(reg, result, (LireRegistre(reg, operande1) ^ LireRegistre(reg, operande2)));
 }
 
 void SLT(int instruct,Registre* reg){
@@ -132,15 +145,26 @@ void ADDI(int instruct,Registre* reg){
 }
 
 void LUI(int instruct,Registre* reg){
+  int   rt = (instruct >> 16)%0x20;
+  int immediate  = instruct % 0x10000;
 
+  EcrireRegistre(reg, rt, immediate || 0000000000000000);
 }
 
-void LW(int instruct,Registre* reg){
+void LW(int* mem, int instruct,Registre* reg){
+  int base = (instruct >> 21)%0x20;
+  int   rt = (instruct >> 16)%0x20;
+  int offset  = instruct % 0x10000;
 
+  EcrireRegistre(reg, rt, *(mem+LireRegistre(reg, base)+offset));
 }
 
-void SW(int instruct,Registre* reg){
+void SW(int* mem,int instruct,Registre* reg){
+  int base = (instruct >> 21)%0x20;
+  int   rt = (instruct >> 16)%0x20;
+  int   offset  = instruct % 0x10000;
 
+  EcrireMemDonne(mem,LireRegistre(reg, base)+offset,LireRegistre(reg, rt));
 }
 
 void Execute(int i,int* mem, Registre* reg){
@@ -208,8 +232,8 @@ void Execute(int i,int* mem, Registre* reg){
 
         case 0x0F: LUI(instruct,reg);break;
 
-        case 0x23: LW(instruct,reg);break;
+        case 0x23: LW(mem,instruct,reg);break;
 
-        case 0x2B: SW(instruct,reg);break;
+        case 0x2B: SW(mem,instruct,reg);break;
       }
 }

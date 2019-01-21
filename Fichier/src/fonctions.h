@@ -45,8 +45,8 @@ void ADDI(int instruct,Registre*);
 
 void LUI(int instruct,Registre*);
 
-void LW(int instruct,Registre*);
+void LW(int*, int instruct,Registre*);
 
-void SW(int instruct,Registre*);
+void SW(int*, int instruct,Registre*);
 
 void Execute(int,int*,Registre*);

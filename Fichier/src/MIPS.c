@@ -15,7 +15,7 @@
 
 
     //exectution
-    printf("***************\nEmulateur MIPS\n\n\n\nFichier compiler\ndebut de l'initialisation");
+    printf("***************\nEmulateur MIPS\n\n\n\nFichier compiler\ndebut de l'initialisation\n");
     Registre reg;
     InitReg(&reg);
     printf("registre initialiser\n");
