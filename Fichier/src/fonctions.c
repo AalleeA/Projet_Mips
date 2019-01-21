@@ -4,8 +4,12 @@
 #include "Registre.h"
 #include "fonctions.h"
 
-void SSL(int instruct,Registre* reg){
+void SLL(int instruct,Registre* reg){
+  int operande1 = (instruct >> 11)%0x20;
+  int operande2 = (instruct >> 16)%0x20;
+  int decalage = (instruct >> 6)%0x20;
 
+  EcrireRegistre(reg, operande1, (LireRegistre(reg, operande2)<<decalage));
 }
 
 void NOP(int instruct,Registre* reg){
@@ -13,11 +17,27 @@ void NOP(int instruct,Registre* reg){
 }
 
 void ROTR(int instruct,Registre* reg){
+  int depart = (instruct >> 16)%0x20;
+  int arrivee = (instruct >> 11)%0x20;
+  int decalage = (instruct >> 6)%0x20;
 
+
+  for(int i = 0; i<abs(decalage); i++){
+    int tmp = depart%0x02;
+    depart = depart >> 1;
+    tmp = tmp << 5;
+    depart += tmp;
+  }
+
+  EcrireRegistre(reg, arrivee, depart);
 }
 
 void SRL(int instruct,Registre* reg){
+  int operande1 = (instruct >> 11)%0x20;
+  int operande2 = (instruct >> 16)%0x20;
+  int decalage = (instruct >> 6)%0x20;
 
+  EcrireRegistre(reg, operande1, (LireRegistre(reg, operande2)>>decalage));
 }
 
 void MFHI(int instruct,Registre* reg){
@@ -61,7 +81,11 @@ void AND(int instruct,Registre* reg){
 }
 
 void OR(int instruct,Registre* reg){
+  int operande1 = (instruct >> 16)%0x20;
+  int operande2 = (instruct >> 21)%0x20;
+  int result = (instruct >> 11)%0x20;
 
+  EcrireRegistre(reg, result, (LireRegistre(reg, operande2) || LireRegistre(reg, operande1)));
 }
 
 void XOR(int instruct,Registre* reg){
@@ -69,7 +93,16 @@ void XOR(int instruct,Registre* reg){
 }
 
 void SLT(int instruct,Registre* reg){
+  int cible = (instruct >> 11)%0x20;
+  int operande1 = (instruct >> 16)%0x20;
+  int operande2 = (instruct >> 21)%0x20;
 
+  if(operande2 < operande1){
+    EcrireRegistre(reg, cible, 1);
+  }
+  else{
+    EcrireRegistre(reg, cible, 0);
+  }
 }
 
 void jump(int instruct,Registre* reg){
@@ -161,7 +194,7 @@ void Execute(int i,int* mem, Registre* reg){
           operateur = instruct%32;
           switch (operateur) {
             case 0x00:
-              if(instruct != 0x00) SSL(instruct,reg);
+              if(instruct != 0x00) SLL(instruct,reg);
               else NOP(instruct,reg);
               break;
 
