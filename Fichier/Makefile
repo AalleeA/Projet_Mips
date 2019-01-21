@@ -9,6 +9,7 @@ Mips : $(BIN_PATH)MIPS.o $(BIN_PATH)Read.o $(BIN_PATH)ecritureFichier.o $(BIN_PA
 	#clear
 	./Mips Test/Test1.txt
 
+
 $(BIN_PATH)MIPS.o : $(SRC_PATH)MIPS.c
 
 	gcc -Wall -c -o $@ $<
