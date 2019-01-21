@@ -6,8 +6,13 @@ BIN_PATH = bin/
 
 Mips : $(BIN_PATH)MIPS.o $(BIN_PATH)Read.o $(BIN_PATH)ecritureFichier.o $(BIN_PATH)Registre.o $(BIN_PATH)charToHexa.o $(BIN_PATH)memoire.o $(BIN_PATH)fonctions.o
 	gcc -o $@ -Wall $^ -lm
+<<<<<<< HEAD
+	#clear
+	./Mips Test/Test1.txt
+=======
 	clear
 	./Mips Test/Test4.txt
+>>>>>>> 8c9dc42bcdf35e16d9e5e74cb185d6974792c06b
 
 $(BIN_PATH)MIPS.o : $(SRC_PATH)MIPS.c
 
