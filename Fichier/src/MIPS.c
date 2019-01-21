@@ -30,7 +30,7 @@ int main(int argc, char *argv[]){
       Execute((*(reg.pc)),memoire,&reg);
       AfficherMemoireDonnee(memoire);
       AfficherRegistre(&reg);
-      (*(reg.pc))+=8;
+      (*(reg.pc))+=4;
     }
 
 
