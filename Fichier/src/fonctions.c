@@ -36,8 +36,8 @@ void DIV(int instruct,Registre* reg){
   int operande1 = (instruct >> 21)%0x20;
   int operande2 = (instruct >> 16)%0x20;
 
-  EcrireRegistre(&reg, 33, (LireRegistre(reg, operande1)/LireRegistre(reg, operande2)));
-  EcrireRegistre(&reg, 32, (LireRegistre(reg, operande1)%LireRegistre(reg, operande2)));
+  EcrireRegistre(reg, 33, (LireRegistre(reg, operande1)/LireRegistre(reg, operande2)));
+  EcrireRegistre(reg, 32, (LireRegistre(reg, operande1)%LireRegistre(reg, operande2)));
 }
 
 void ADD(int instruct,Registre* reg){
@@ -45,7 +45,7 @@ void ADD(int instruct,Registre* reg){
   int operande2 = (instruct >> 16)%0x20;
   int result = (instruct >> 11)%0x20;
 
-  EcrireRegistre(&reg, result, (LireRegistre(&reg, operande1) + LireRegistre(&reg, operande2)));
+  EcrireRegistre(reg, result, (LireRegistre(reg, operande1) + LireRegistre(reg, operande2)));
 }
 
 void SUB(int instruct,Registre* reg){
@@ -57,7 +57,7 @@ void AND(int instruct,Registre* reg){
   int operande2 = (instruct >> 16)%0x20;
   int result = (instruct >> 11)%0x20;
 
-  EcrireRegistre(&reg, result, (LireRegistre(&reg, operande1) && LireRegistre(&reg, operande2)));
+  EcrireRegistre(reg, result, (LireRegistre(reg, operande1) && LireRegistre(reg, operande2)));
 }
 
 void OR(int instruct,Registre* reg){
@@ -80,7 +80,7 @@ void jump(int instruct,Registre* reg){
   index_registre = index_registre << 2; //décale à gauche pour retrouver l'adresse pointé par l'instruction
 //  printf("%x\n", index_registre);
 
-  EcrireRegistre(&reg, 34, index_registre);
+  EcrireRegistre(reg, 34, index_registre);
 }
 
 void BEQ(int instruct,Registre* reg){
@@ -88,8 +88,8 @@ void BEQ(int instruct,Registre* reg){
   int offset = instruct%0x010000;
   int operande2 = (instruct >> 16)%0x20;
 
-  if(LireRegistre(&reg, operande1) == LireRegistre(&reg, operande2)){
-    EcrireRegistre(&reg, 34, (LireRegistre(&reg, 34)+offset)); //modifie le PC en ajoutant l'offset
+  if(LireRegistre(reg, operande1) == LireRegistre(reg, operande2)){
+    EcrireRegistre(reg, 34, (LireRegistre(reg, 34)+offset)); //modifie le PC en ajoutant l'offset
   }
 }
 
@@ -98,8 +98,8 @@ void BNE(int instruct,Registre* reg){
   int offset = instruct%0x010000;
   int operande2 = (instruct >> 16)%0x20;
 
-  if(LireRegistre(&reg, operande1) != LireRegistre(&reg, operande2)){
-    EcrireRegistre(&reg, 34, (LireRegistre(&reg, 34)+offset)); //modifie le PC en ajoutant l'offset
+  if(LireRegistre(reg, operande1) != LireRegistre(reg, operande2)){
+    EcrireRegistre(reg, 34, (LireRegistre(reg, 34)+offset)); //modifie le PC en ajoutant l'offset
   }
 }
 
@@ -108,8 +108,8 @@ void BLEZ(int instruct,Registre* reg){
   int offset = instruct%0x010000;
   int operande2 = (instruct >> 16)%0x20;
 
-  if(LireRegistre(&reg, operande1) <= LireRegistre(&reg, operande2)){
-    EcrireRegistre(&reg, 34, (LireRegistre(&reg, 34)+offset)); //modifie le PC en ajoutant l'offset
+  if(LireRegistre(reg, operande1) <= LireRegistre(reg, operande2)){
+    EcrireRegistre(reg, 34, (LireRegistre(reg, 34)+offset)); //modifie le PC en ajoutant l'offset
   }
 }
 
@@ -118,8 +118,8 @@ void BGTZ(int instruct,Registre* reg){
   int offset = instruct%0x010000;
   int operande2 = (instruct >> 16)%0x20;
 
-  if(LireRegistre(&reg, operande1) > LireRegistre(&reg, operande2)){
-    EcrireRegistre(&reg, 34, (LireRegistre(&reg, 34)+offset)); //modifie le PC en ajoutant l'offset
+  if(LireRegistre(reg, operande1) > LireRegistre(reg, operande2)){
+    EcrireRegistre(reg, 34, (LireRegistre(reg, 34)+offset)); //modifie le PC en ajoutant l'offset
   }
 }
 
@@ -128,7 +128,7 @@ void ADDI(int instruct,Registre* reg){
   int operande2 = instruct%0x010000;
   int result = (instruct >> 16)%0x20;
 
-  EcrireRegistre(&reg, result, (LireRegistre(&reg, operande1) + operande2));
+  EcrireRegistre(reg, result, (LireRegistre(reg, operande1) + operande2));
 }
 
 void LUI(int instruct,Registre* reg){
@@ -146,7 +146,6 @@ void SW(int instruct,Registre* reg){
 void Execute(int i,int* mem, Registre* reg){
   //tableau de int contenant la ligne d'instruction
   int instruct;
-  int carrac;
   int operateur = 0; //variable récupérant l'opérateur de l'instruction
   //Ouverture du fichier avec les codes hexa
 
@@ -171,10 +170,10 @@ void Execute(int i,int* mem, Registre* reg){
             case 0x02:
               operateur = instruct>>21;
               if(operateur == 1) ROTR(instruct,reg);
-              else SRL(instruct);
+              else SRL(instruct,reg);
               break;
 
-            case 0x0C: SYSCALL(instruct,reg);break;
+            //case 0x0C: SYSCALL(instruct,reg);break;
 
             case 0x10: MFHI(instruct,reg);break;
 
