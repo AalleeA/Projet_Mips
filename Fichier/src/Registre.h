@@ -25,3 +25,4 @@ void InitReg(Registre*);
 
 int LireRegistre(Registre*,int);
 void EcrireRegistre(Registre*, int, int);
+void AfficherRegistre(Registre*);
