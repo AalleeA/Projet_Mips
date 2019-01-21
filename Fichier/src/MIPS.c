@@ -14,15 +14,17 @@
 
 
     //exectution
-    int i = 0;
     Registre reg;
     InitReg(&reg);
     int *memoire = NULL;
     memoire = InitMem();
     Loadprog(memoire, "Test/Test2.txt");
-    while(*(memoire+i) != 0 && i<100){
-      Execute(i,memoire);
-      i+=8;
+    AfficherMemoireProg(memoire);
+    while(*(memoire+(*(reg.pc))) != 0 && (*(reg.pc))<100){
+      Execute((*(reg.pc)),memoire);
+      AfficherMemoireDonnee(memoire);
+      AfficherRegistre(&reg);
+      (*(reg.pc))+=8;
     }
 
 
