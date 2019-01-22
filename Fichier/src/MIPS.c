@@ -12,11 +12,10 @@ int Mode = 0;
 int main(int argc, char *argv[]){
 
     //compilation
-    printf("%s\n\n\n\n",charToHexa(Decode(argv[1])));
+    //printf("%s\n\n\n\n",charToHexa(Decode(argv[1])));
 
     //exectution
     printf("***************\nEmulateur MIPS\n\n\n\nFichier compiler\ndebut de l'initialisation\n");
-
 
     Registre reg;
     InitReg(&reg);
@@ -26,8 +25,21 @@ int main(int argc, char *argv[]){
     printf("memoire initialiser\n");
 
 
-    if(Mode == 0){
-      Loadprog(memoire, "Test/Test2.txt");
+    if(argv[1] == "-it"){
+      char* instruct;
+      while(instruct != "exit"){
+        printf("\n\nEntrée une instruction\n");
+        scanf("%[^\n]",&instruct);
+        *(memoire) = charToHexa(Decode(instruct));
+        AfficherMemoireProg(memoire);
+        Execute((*(reg.pc)),memoire,&reg);
+        AfficherMemoireDonnee(memoire);
+        AfficherRegistre(&reg);
+        *(memoire) = 0;
+      }
+    }
+    else{
+      Loadprog(memoire, argv[1]);
       printf("memoire de programe charger\n Affichage : ");
       AfficherMemoireProg(memoire);
 
@@ -37,20 +49,6 @@ int main(int argc, char *argv[]){
         AfficherRegistre(&reg);
         (*(reg.pc))+=4;
       }
-    }
-    else{
-      char* instruct;
-      while(instruct != "exit"){
-        printf("\n\nEntrée une instruction\n");
-        scanf("%[^\n]",&instruct);
-        *(memoire) = chartoHexa(Decode(instruct));
-        AfficherMemoireProg(memoire);
-        Execute((*(reg.pc)),memoire,&reg);
-        AfficherMemoireDonnee(memoire);
-        AfficherRegistre(&reg);
-        *(memoire) = 0;
-      }
-
     }
 
 }
