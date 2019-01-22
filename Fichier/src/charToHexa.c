@@ -19,7 +19,6 @@ int main(int argc, char const *argv[]) {
   return 0;
 }
 void charToHexa( InstructionBrut instruction[]){//Fonction de redirection
-  char* result;
   int i = 0;
   while(instruction[i].Instruc != NULL){//arret lorsque plus d'instructions
 
@@ -42,12 +41,12 @@ void charToHexa( InstructionBrut instruction[]){//Fonction de redirection
 
           convertionInstructionTypeI(instruction[i].Instruc, instruction[i].Operande1, instruction[i].Operande2, instruction[i].Operande3);
 
-        }/*
+        }
         else{//dans le cas d'une instruction de type R
 
           resultat = convertionInstructionTypeR(instruction.Insctruc, instruction.Operande1, instruction.Operande2, instruction.Operande3);
 
-        }*/
+        }
       }
     }
     i++;
@@ -110,7 +109,7 @@ void convertionInstructionTypeJ (char* instruction, char* operande){
 }
 
 //on rentre bien dedans
-/* char* convertionInstructionTypeI (char* instruction, char* operande1, char* operande2, char* operande3){
+void convertionInstructionTypeI (char* instruction, char* operande1, char* operande2, char* operande3){
 
   /*
   *Dans l'ordre
@@ -178,12 +177,50 @@ void convertionInstructionTypeJ (char* instruction, char* operande){
 
 
 }
-/*
+
 void convertionInstructionTypeR (char instruction, char operande1, char operande2, char operande3){
 
+  int i;
+  if(*operande1 == '$'){
+    operande1++;
+  }
+  int valop1 = 0;
+  for(i = 0; i <= strlen(operande1)-1; i++){
+    valop1 += (*(operande1+i) - '0') * pow(10, strlen(operande1) - i - 1 );
+  }
+  if(*operande2 == '$'){
+    operande2++;
+  }
+  int valop2 = 0;
+  for(i = 0; i <= strlen(operande2)-1; i++){
+    valop2 += (*(operande2+i) - '0') * pow(10, strlen(operande2) - i - 1 );
+  }
+  int valop3 = 0;
+  if(*operande3 == '$'){
+    operande3++;
+  }
+  for(i = 0; i <= strlen(operande3)-1; i++){
+    valop3 += (*(operande3+i) - '0') * pow(10, strlen(operande3) - i  - 1);
+  }
 
+  int j, val = 0;
+  for(i = 0; i < NBINSTRUCTIONR * 2; i += 2){
 
-}*/
+    if(!strcmp(instruction,instructionR[i])){//strcmp renvoi 0 si ==
+      val = i;
+    }
+  }
+  //Redecoupage
+  int rep;
+  switch (valeurInstruct) {
+    case 0x20://ADD
+      rep = (valeurInstruct<<26) + (valop1<<21) + (valop2<<16) + (valop3);
+      break;
+  }
+
+  printf("%x\n", rep);
+
+}
 
 //Ca marche
 //on fournit la chaine de reponse (8 caractere hexa), la chaine de 32 bits ainsi que la position actuelle où on se trouve dan sla lecture de celle-ci (i)

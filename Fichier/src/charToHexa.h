@@ -3,7 +3,7 @@
 
 #define NBINSTRUCTIONJ 2
 #define NBINSTRUCTIONI 8
-#define NBINSTRUCTIONR
+#define NBINSTRUCTIONR 13
 
 char* charToHexa( InstructionBrut instruction[]);//Fonction de redirection
 char* convertionInstructionTypeJ (char* instruction, char* operande1);
