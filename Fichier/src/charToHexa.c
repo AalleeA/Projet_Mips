@@ -39,7 +39,7 @@ void charToHexa( InstructionBrut instruction[]){//Fonction de redirection
         }
         else{//dans le cas d'une instruction de type R
 
-        convertionInstructionTypeR(instruction.Insctruc, instruction.Operande1, instruction.Operande2, instruction.Operande3);
+          convertionInstructionTypeR(instruction[i].Insctruc, instruction[i].Operande1, instruction[i].Operande2, instruction[i].Operande3);
 
         }
       }
