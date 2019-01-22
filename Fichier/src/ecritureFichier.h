@@ -2,4 +2,4 @@
 #include <stdlib.h>
 #include <string.h>
 
-void ecrireFichier(char* instruct);
+void ecrireFichier(int instruct);
