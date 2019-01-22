@@ -54,7 +54,12 @@ void MHLO(int instruct,Registre* reg){
 }
 
 void MULT(int instruct,Registre* reg){
+  int operande1 = (instruct >> 21)%0x20;
+  int operande2 = (instruct >> 16)%0x20;
+  int hi = operande1*operande2;
 
+  EcrireRegistre(reg, 33, hi>>32);
+  EcrireRegistre(reg, 32, hi%FFFF);
 }
 
 void DIV(int instruct,Registre* reg){
