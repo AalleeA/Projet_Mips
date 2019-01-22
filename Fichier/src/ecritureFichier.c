@@ -17,6 +17,9 @@ void ecrireFichier(char* instruct){
     printf("%d\n", strlen(instruct));
     for(int i = 0; i<strlen(instruct); i++){
       fprintf(fichier, "%c", instruct[i]);
+      if(i%2 == 1){
+        fprintf(fichier, " ");
+      }
     }
     fprintf(fichier, "\n");
 
@@ -40,7 +43,7 @@ int lireFichier(){
     octet = fgetc(fichier);
 
     while(octet != EOF){
-      
+
     }
   }
   else{
