@@ -35,7 +35,7 @@ char* charToHexa( InstructionBrut instruction[]){//Fonction de redirection
       }else{
         if((instruction[i].Operande3 == NULL)||(instruction[i].Operande3[0] != "$")){//dans le cas d'une instruction de type I
 
-          result = convertionInstructionTypeI(instruction[i].Instruc, instruction[i].Operande1, instruction[i].Operande2, instruction[i].Operande3);
+        //  result = convertionInstructionTypeI(instruction[i].Instruc, instruction[i].Operande1, instruction[i].Operande2, instruction[i].Operande3);
 
         }/*
         else{//dans le cas d'une instruction de type R
@@ -105,7 +105,7 @@ char* convertionInstructionTypeJ (char* instruction, char* operande){
 }
 
 //on rentre bien dedans
-void convertionInstructionTypeI (char* instruction, char* operande1, char* operande2, char* operande3){
+/* char* convertionInstructionTypeI (char* instruction, char* operande1, char* operande2, char* operande3){
 
   /*
   *Dans l'ordre
@@ -113,7 +113,7 @@ void convertionInstructionTypeI (char* instruction, char* operande1, char* opera
   * - Reconnaitre le type I qu'on a, classique/ rt = 0 / rs = 0 / avec base (en utilisant une variable lors de la recherche dans le tableau)
   * - modifier les operandes si besoin
   * - Convertir en hexa comme avant
-  */
+
 
   //recherche de l'instruction
   int i, j, val = 0;
@@ -133,7 +133,7 @@ void convertionInstructionTypeI (char* instruction, char* operande1, char* opera
   }
 
   printf("instruction I : %s = %s\n", instruction, instructionI[val + 1] );
-
+  return instructionI[val + 1];
 }
 /*
 void convertionInstructionTypeR (char instruction, char operande1, char operande2, char operande3){

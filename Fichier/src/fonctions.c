@@ -14,7 +14,7 @@ void SLL(int instruct,Registre* reg){
 }
 
 void NOP(int instruct,Registre* reg){
-  SSL(0,reg);
+  SLL(0,reg);
 }
 
 void ROTR(int instruct,Registre* reg){

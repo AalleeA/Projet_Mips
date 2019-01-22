@@ -5,9 +5,9 @@
 #define NBINSTRUCTIONI 8
 #define NBINSTRUCTIONR
 
-void charToHexa( InstructionBrut instruction[]);//Fonction de redirection
-void convertionInstructionTypeJ (char* instruction, char* operande1);
-void convertionInstructionTypeI (char* instruction, char* operande1, char* operande2, char* operande3);
+char* charToHexa( InstructionBrut instruction[]);//Fonction de redirection
+char* convertionInstructionTypeJ (char* instruction, char* operande1);
+char* convertionInstructionTypeI (char* instruction, char* operande1, char* operande2, char* operande3);
 void convertionInstructionTypeR (char* instruction, char* operande1, char* operande2, char* operande3);
 
 void convBinToHexa(char* reponse, char* sortie, int i);
