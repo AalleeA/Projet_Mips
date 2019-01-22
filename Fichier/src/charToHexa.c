@@ -48,7 +48,7 @@ void charToHexa( InstructionBrut instruction[]){//Fonction de redirection
         }
         else{//dans le cas d'une instruction de type R
 
-          resultat = convertionInstructionTypeR(instruction.Insctruc, instruction.Operande1, instruction.Operande2, instruction.Operande3);
+          convertionInstructionTypeR(instruction[i].Insctruc, instruction[i].Operande1, instruction[i].Operande2, instruction[i].Operande3);
 
         }
       }
@@ -72,7 +72,7 @@ void convertionInstructionTypeJ (char* instruction, char* operande){
       val = i;
     }
   }
-  
+
   //Calcul valeur operande
   int valeurInstruct = 0;
   for(i = 0; i < 6; i++){

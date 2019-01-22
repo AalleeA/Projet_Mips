@@ -40,8 +40,8 @@ char instructionR [NBINSTRUCTIONR * 2][7] = {
   {"STL"}, {"101010"},
   {"SRL"}, {"000010"},
   {"SUB"}, {"100010"},
-  {"XOR"}, {"100110"}  
-}
+  {"XOR"}, {"100110"}
+};
 
   char binaireToHexa[33][5] = {
     {"0000"},{"0"},
