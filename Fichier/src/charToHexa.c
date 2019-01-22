@@ -222,9 +222,19 @@ void convertionInstructionTypeR (char* instruction, char* operande1, char* opera
   int rep;
   switch (valeurInstruct) {
     case 0x20://ADD
-      rep = (valeurInstruct<<26) + (valop1<<21) + (valop2<<16) + (valop3);
+      rep = (0x00<<26) + (valop2 <<21) + (valop3<<16) + (valop1<<11) + (OxOO<<6) + (valeurInstruct);
+      break;
+    case 0x24://AND
+      rep = (0x00<<26) + (valop2 <<21) + (valop3<<16) + (valop1<<11) + (OxOO<<6) + (valeurInstruct);
+      break;
+    case 0x1A://DIV
+      rep = (0x00<<26) + (valop1 <<21) + (valop2<<16) + (0x000<<10) + valeurInstruct;
+      break;
+    case 0x10://MFHI
+      rep = (0x0000<<16) + (valop1<<11) + (0x00<<6) + valeurInstruct;
       break;
   }
+  ecrireFichier(rep);
 
 }
 
