@@ -39,7 +39,7 @@ void charToHexa( InstructionBrut instruction[]){//Fonction de redirection
         }
         else{//dans le cas d'une instruction de type R
 
-          convertionInstructionTypeR(instruction[i].Insctruc, instruction[i].Operande1, instruction[i].Operande2, instruction[i].Operande3);
+          convertionInstructionTypeR(instruction[i].Instruc, instruction[i].Operande1, instruction[i].Operande2, instruction[i].Operande3);
 
         }
       }
@@ -148,7 +148,7 @@ void convertionInstructionTypeI (char* instruction, char* operande1, char* opera
 
 }
 
-void convertionInstructionTypeR (char instruction, char operande1, char operande2, char operande3){
+void convertionInstructionTypeR (char* instruction, char* operande1, char* operande2, char* operande3){
 
   int i;
   if(*operande1 == '$'){
@@ -181,6 +181,11 @@ void convertionInstructionTypeR (char instruction, char operande1, char operande
     }
   }
   //Redecoupage
+  int valeurInstruct = 0;
+  for(i = 0; i < 6; i++){
+    valeurInstruct += (instructionI[val+1][i] - 48) * pow(2, 5 - i );
+  }
+
   int rep;
   switch (valeurInstruct) {
     case 0x20://ADD
