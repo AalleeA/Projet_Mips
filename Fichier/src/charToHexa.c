@@ -12,7 +12,12 @@
   * On reçoit un tableau de type InstructionBrut
   * Si l'element Instruc de l'InstructionBrut est == NULL alors fin du tableau
   */
-
+int main(int argc, char const *argv[]) {
+  InstructionBrut operation = {"ADDI", "$12","$0","4530"};
+  InstructionBrut operation1[] = {operation, NULL};
+  charToHexa(&operation1);
+  return 0;
+}
 void charToHexa( InstructionBrut instruction[]){//Fonction de redirection
   int i = 0;
   while(instruction[i].Instruc != NULL){//arret lorsque plus d'instructions
@@ -71,12 +76,20 @@ void convertionInstructionTypeJ (char* instruction, char* operande){
     valeurInstruct += (instructionI[val+1][i] - 48) * pow(2, 5 - i );
   }
 
-  int rep = 0;
+  int rep;
+  switch (valeurInstruct) {
+    case 0x02://J
+      rep = (valeurInstruct<<26) + valop1;
+      break;
+    case 0x03://JAL
+      rep = (valeurInstruct<<26) + valop1;
+      break;
+  }
+
+  rep = 0;
 
   rep = (valeurInstruct<<26) + valop1;
 
-
-  printf("%x\n",rep);
   ecrireFichier(rep);
 }
 
@@ -89,13 +102,33 @@ void convertionInstructionTypeI (char* instruction, char* operande1, char* opera
   * - envoi sur la fct correpondante
   */
   int i;
-  char reponse[9] = {0};
+
   if(*operande1 == '$'){
     operande1++;
   }
   int valop1 = 0;
   for(i = 0; i <= strlen(operande1)-1; i++){
     valop1 += (*(operande1+i) - '0') * pow(10, strlen(operande1) - i - 1 );
+  }
+
+  //sortir l'offset
+  if(strch(operande2, '(') != NULL){//on a un offset
+    char* carac = NULL;
+    i=0;
+    char* op2[16];
+    while(carac != '('){//on prend jusqu'a la paranthese
+      op2[i] = *(operande2+i);
+      i++;
+      carac = *(operande2+i);
+    }
+    i++;//on passe la paranthèse
+    int j=0;
+    while (carac != ')') {
+      *(operande3+j) = *(operande2+j+i);
+      j++;
+      carac = *(operande2+j+i+1);
+    }
+    operande2 = op2;
   }
 
   if(*operande2 == '$'){
@@ -105,7 +138,6 @@ void convertionInstructionTypeI (char* instruction, char* operande1, char* opera
   for(i = 0; i <= strlen(operande2)-1; i++){
     valop2 += (*(operande2+i) - '0') * pow(10, strlen(operande2) - i - 1 );
   }
-
   int valop3 = 0;
   if(operande3 != NULL){
     if(*operande3 == '$'){
@@ -114,7 +146,6 @@ void convertionInstructionTypeI (char* instruction, char* operande1, char* opera
     for(i = 0; i <= strlen(operande3)-1; i++){
       valop3 += (*(operande3+i) - '0') * pow(10, strlen(operande3) - i  - 1);
     }
-
   }
 
   //recherche de l'instruction
@@ -126,25 +157,32 @@ void convertionInstructionTypeI (char* instruction, char* operande1, char* opera
     }
 
   }
-
   //Calcul valeur operande
   int valeurInstruct = 0;
   for(i = 0; i < 6; i++){
+
     valeurInstruct += (instructionI[val+1][i] - 48) * pow(2, 5 - i );
   }
-
-
   //OKAY
 
   //Redecoupage
   int rep;
+  switch (valeurInstruct) {
+    case 0x08://ADDI
+      rep = (valeurInstruct<<26) + (valop1<<21) + (valop2<<16) + (valop3);
+      break;
+    case 0x04://BEQ
+      rep = (valeurInstruct<<26) + (valop1<<21) + (valop2<<16) + (valop3);
+      break;
+    case 0x05://BNE
+      rep = (valeurInstruct<<26) + (valop1<<21) + (valop2<<16) + (valop3);
+      break;
+  //  case 0x07://BGTZ
+
+  }
   char sortie[33] = {0};
   rep = (valeurInstruct<<26) + (valop1<<16) + (valop2<<21) + (valop3);
   ecrireFichier(rep);
-
-
-
-
 
 }
 
@@ -192,8 +230,6 @@ void convertionInstructionTypeR (char* instruction, char* operande1, char* opera
       rep = (valeurInstruct<<26) + (valop1<<21) + (valop2<<16) + (valop3);
       break;
   }
-
-  printf("%x\n", rep);
 
 }
 
