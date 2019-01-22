@@ -110,7 +110,7 @@ void convertionInstructionTypeJ (char* instruction, char* operande){
 }
 
 //on rentre bien dedans
-void convertionInstructionTypeI (char* instruction, char* operande1, char* operande2, char* operande3){
+/* char* convertionInstructionTypeI (char* instruction, char* operande1, char* operande2, char* operande3){
 
   /*
   *Dans l'ordre
