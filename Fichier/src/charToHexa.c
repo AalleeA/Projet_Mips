@@ -12,8 +12,12 @@
   * On reçoit un tableau de type InstructionBrut
   * Si l'element Instruc de l'InstructionBrut est == NULL alors fin du tableau
   */
-
-char* charToHexa( InstructionBrut instruction[]){//Fonction de redirection
+int main(int argc, char const *argv[]) {
+  InstructionBrut operation = {"ADDI", "$12","$0","5"};
+  charToHexa(&operation);
+  return 0;
+}
+void charToHexa( InstructionBrut instruction[]){//Fonction de redirection
   char* result;
   int i = 0;
   while(instruction[i].Instruc != NULL){//arret lorsque plus d'instructions
@@ -30,12 +34,12 @@ char* charToHexa( InstructionBrut instruction[]){//Fonction de redirection
       //séparation instruction type J, I, r
       if(instruction[i].Operande2 == NULL){//dans le cas d'une instruction de type J
 
-        result = convertionInstructionTypeJ(instruction[i].Instruc, instruction[i].Operande1);
+        convertionInstructionTypeJ(instruction[i].Instruc, instruction[i].Operande1);
 
       }else{
         if((instruction[i].Operande3 == NULL)||(instruction[i].Operande3[0] != "$")){//dans le cas d'une instruction de type I
 
-          result = convertionInstructionTypeI(instruction[i].Instruc, instruction[i].Operande1, instruction[i].Operande2, instruction[i].Operande3);
+          convertionInstructionTypeI(instruction[i].Instruc, instruction[i].Operande1, instruction[i].Operande2, instruction[i].Operande3);
 
         }/*
         else{//dans le cas d'une instruction de type R
@@ -50,7 +54,7 @@ char* charToHexa( InstructionBrut instruction[]){//Fonction de redirection
   return result;
 }
 
-char* convertionInstructionTypeJ (char* instruction, char* operande){
+void convertionInstructionTypeJ (char* instruction, char* operande){
 
   int i = 0;
   int j = 0;
@@ -101,7 +105,7 @@ char* convertionInstructionTypeJ (char* instruction, char* operande){
   //envoi de la chaine de caractere en hexa
   //ecrireFichier(reponse);
   printf("%s\n", reponse );
-  return reponse;
+
 }
 
 //on rentre bien dedans
@@ -110,9 +114,7 @@ void convertionInstructionTypeI (char* instruction, char* operande1, char* opera
   /*
   *Dans l'ordre
   * - Récupérer l'opérande correpondante
-  * - Reconnaitre le type I qu'on a, classique/ rt = 0 / rs = 0 / avec base (en utilisant une variable lors de la recherche dans le tableau)
-  * - modifier les operandes si besoin
-  * - Convertir en hexa comme avant
+  * - envoi sur la fct correpondante
   */
 
   //recherche de l'instruction
@@ -133,6 +135,14 @@ void convertionInstructionTypeI (char* instruction, char* operande1, char* opera
   }
 
   printf("instruction I : %s = %s\n", instruction, instructionI[val + 1] );
+
+  //Calcul valeur operande
+  int valeur = 0;
+  for(i = 0; i < 6; i++){
+
+    valeur += (instructionI[val+1][i] - 48) * pow(2, 5 - i );
+    printf("entree[%d] = %d\n",i, instructionI[val+1][i] );
+  }
 
 }
 /*
