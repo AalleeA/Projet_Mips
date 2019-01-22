@@ -59,7 +59,7 @@ void MULT(int instruct,Registre* reg){
   int hi = operande1*operande2;
 
   EcrireRegistre(reg, 33, hi>>32);
-  EcrireRegistre(reg, 32, hi%FFFF);
+  EcrireRegistre(reg, 32, hi%0xFFFF);
 }
 
 void DIV(int instruct,Registre* reg){

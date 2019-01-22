@@ -12,12 +12,7 @@
   * On reçoit un tableau de type InstructionBrut
   * Si l'element Instruc de l'InstructionBrut est == NULL alors fin du tableau
   */
-int main(int argc, char const *argv[]) {
-  InstructionBrut operation = {"ADDI", "$12","$0","4530"};
-  InstructionBrut operation1[] = {operation, NULL};
-  charToHexa(&operation1);
-  return 0;
-}
+
 void charToHexa( InstructionBrut instruction[]){//Fonction de redirection
   int i = 0;
   while(instruction[i].Instruc != NULL){//arret lorsque plus d'instructions
@@ -112,7 +107,7 @@ void convertionInstructionTypeI (char* instruction, char* operande1, char* opera
   }
 
   //sortir l'offset
-  if(strch(operande2, '(') != NULL){//on a un offset
+  if(strchr(operande2, '(') != NULL){//on a un offset
     char* carac = NULL;
     i=0;
     char* op2[16];
