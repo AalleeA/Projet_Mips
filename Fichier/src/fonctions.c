@@ -171,7 +171,7 @@ void ADDI(int instruct,Registre* reg){
   int operande1 = (instruct >> 21)%0x20;
   int operande2 = instruct%0x010000;
   int result = (instruct >> 16)%0x20;
-
+  printf("\n ADDI $%d, $%d, #%d", result, operande1, operande2);
   EcrireRegistre(reg, result, (LireRegistre(reg, operande1) + operande2));
 }
 
