@@ -6,7 +6,7 @@
 //#include "fonctions.h"
 
 
-void ecrireFichier(char* instruct){
+void ecrireFichier(int instruct){
   //ouverture du fichier
   FILE * fichier;
 
@@ -14,13 +14,11 @@ void ecrireFichier(char* instruct){
   fichier = fopen("assembleur_hexa.txt", "a+");
 
   if(fichier != NULL){ //Vérification que le fichier est bien ouvert
-    printf("%d\n", strlen(instruct));
-    for(int i = 0; i<strlen(instruct); i++){
-      fprintf(fichier, "%c", instruct[i]);
-      if(i%2 == 1){
-        fprintf(fichier, " ");
-      }
-    }
+    //printf("%d\n", strlen(instruct));
+    fprintf(fichier,"%x ",(instruct>>24));
+    fprintf(fichier,"%x ",(instruct>>16)%0x100);
+    fprintf(fichier,"%x ",(instruct>>8)%0x100);
+    fprintf(fichier,"%x ",(instruct)%0x100);
     fprintf(fichier, "\n");
 
 

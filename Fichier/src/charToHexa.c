@@ -12,15 +12,7 @@
   * On reçoit un tableau de type InstructionBrut
   * Si l'element Instruc de l'InstructionBrut est == NULL alors fin du tableau
   */
-<<<<<<< HEAD
-=======
-int main(int argc, char const *argv[]) {
-  InstructionBrut operation = {"ADDI", "$12","$0","4530"};
-  InstructionBrut operation1[] = {operation, NULL};
-  charToHexa(&operation1);
-  return 0;
-}
->>>>>>> a1eaf120923f1e385c7be65902c57db61207401a
+
 void charToHexa( InstructionBrut instruction[]){//Fonction de redirection
   char* result;
   int i = 0;
@@ -107,13 +99,9 @@ void convertionInstructionTypeJ (char* instruction, char* operande){
    convBinToHexa(reponse, sortie, 0);
 
   //envoi de la chaine de caractere en hexa
-<<<<<<< HEAD
-  ecrireFichier(reponse);
-=======
-  //ecrireFichier(reponse);
-  printf("%s\n", reponse );
 
->>>>>>> a1eaf120923f1e385c7be65902c57db61207401a
+  //ecrireFichier(reponse);
+
 }
 
 //on rentre bien dedans
@@ -125,6 +113,7 @@ void convertionInstructionTypeI (char* instruction, char* operande1, char* opera
   * - envoi sur la fct correpondante
   */
   int i;
+  char reponse[9] = {0};
   if(*operande1 == '$'){
     operande1++;
   }
@@ -132,12 +121,7 @@ void convertionInstructionTypeI (char* instruction, char* operande1, char* opera
   for(i = 0; i <= strlen(operande1)-1; i++){
     valop1 += (*(operande1+i) - '0') * pow(10, strlen(operande1) - i - 1 );
   }
-<<<<<<< HEAD
 
-=======
-  printf("taille = %d\n",strlen(operande1) );
-  printf("operande1 = %d\n", valop1);
->>>>>>> a1eaf120923f1e385c7be65902c57db61207401a
   if(*operande2 == '$'){
     operande2++;
   }
@@ -145,11 +129,7 @@ void convertionInstructionTypeI (char* instruction, char* operande1, char* opera
   for(i = 0; i <= strlen(operande2)-1; i++){
     valop2 += (*(operande2+i) - '0') * pow(10, strlen(operande2) - i - 1 );
   }
-<<<<<<< HEAD
 
-=======
-  printf("operande2 = %d\n", valop2);
->>>>>>> a1eaf120923f1e385c7be65902c57db61207401a
   int valop3 = 0;
   if(operande3 != NULL){
     if(*operande3 == '$'){
@@ -158,11 +138,7 @@ void convertionInstructionTypeI (char* instruction, char* operande1, char* opera
     for(i = 0; i <= strlen(operande3)-1; i++){
       valop3 += (*(operande3+i) - '0') * pow(10, strlen(operande3) - i  - 1);
     }
-<<<<<<< HEAD
 
-=======
-    printf("operande3 = %d\n", valop3);
->>>>>>> a1eaf120923f1e385c7be65902c57db61207401a
   }
 
   //recherche de l'instruction
@@ -174,37 +150,22 @@ void convertionInstructionTypeI (char* instruction, char* operande1, char* opera
     }
 
   }
-<<<<<<< HEAD
 
-=======
-  printf("instruction I : %s = %s\n", instruction, instructionI[val + 1] );
->>>>>>> a1eaf120923f1e385c7be65902c57db61207401a
   //Calcul valeur operande
   int valeurInstruct = 0;
   for(i = 0; i < 6; i++){
-
     valeurInstruct += (instructionI[val+1][i] - 48) * pow(2, 5 - i );
   }
 
-<<<<<<< HEAD
 
-=======
-  printf("Valeur = %x\n", valeurInstruct);
->>>>>>> a1eaf120923f1e385c7be65902c57db61207401a
   //OKAY
 
   //Redecoupage
   int rep;
-  switch (valeurInstruct) {
-    case 0x08://ADDI
-      rep = (valeurInstruct<<26) + (valop1<<21) + (valop2<<16) + (valop3);
-      break;
-  }
+  char sortie[33] = {0};
+  rep = (valeurInstruct<<26) + (valop1<<21) + (valop2<<16) + (valop3);
+  ecrireFichier(rep);
 
-<<<<<<< HEAD
-=======
-  printf("%x\n", rep);
->>>>>>> a1eaf120923f1e385c7be65902c57db61207401a
 
 
 }
